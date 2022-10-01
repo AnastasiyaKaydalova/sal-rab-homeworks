@@ -7,9 +7,7 @@ function calcShipping(sum, min, shipping) {
    let shippingSum;
    if (productsSum == 0 || productsSum >= freeShippingMinSum) {
     shippingSum = 0;
-    } else if ((productsSum > 0) && (productsSum < freeShippingMinSum)) {
-    shippingSum = shippingPrice;
-    }
+    } shippingSum = productsSum > 0 & productsSum < freeShippingMinSum ? shippingPrice : 0;
     // создайте переменную shippingSum
  
     // если productsSum равно 0,
@@ -32,12 +30,7 @@ function calcDiscount(sum, min, discount) {
     let discountPart = discount; // величина скидки в процентах
 
     // Задание №2.2. Рассчитать скидку
-    let discountSum;
-    if (productsSum >= discountMinSum) {
-        discountSum = (discountPart / 100 * productsSum);
-    } else if (productsSum <= discountMinSum) {
-        discountSum = 0;
-    }
+    let discountSum = productsSum >= discountMinSum ? discountPart / 100 * productsSum : 0;
     // создайте переменную discountSum
 
     // если productsSum больше или равно discountMinSum,
@@ -69,7 +62,8 @@ function calcInvoice({sum, discountMinSum, discountPart, shippingFreeMinSum, shi
     // запишите без использования if или любых других условий:
     // если freeShipping равно нулю, то freeShipping должна быть равна true, иначе freeShipping должна быть равна false
     let freeShipping;
-    freeShipping = !Boolean(shippingSum);
+    freeShipping = !shippingSum;
+
     // Конец решения задачи №2.3.
 
     return {discount: discountSum, freeShipping, shipping: shippingSum, total: totalSum};
